@@ -22,6 +22,8 @@ app.post('/login', (req, res) => {
             });
         }
 
+        console.log(bcrypt.compareSync(body.password, usuarioDB.password));
+        console.log(usuarioDB.password + ' ' + body.password);
         if (!usuarioDB) {
             return res.status(400).json({
                 ok: false,

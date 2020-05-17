@@ -1,4 +1,5 @@
 const express = require('express');
+
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -7,23 +8,20 @@ const Usuario = require('../models/usuario');
 const app = express();
 
 
+
 app.post('/login', (req, res) => {
 
-    // Se reciben los datos por parámetros
     let body = req.body;
 
     Usuario.findOne({ email: body.email }, (err, usuarioDB) => {
 
         if (err) {
-            // Al colocar return se sale de la función
             return res.status(500).json({
                 ok: false,
                 err
             });
         }
 
-        console.log(bcrypt.compareSync(body.password, usuarioDB.password));
-        console.log(usuarioDB.password + ' ' + body.password);
         if (!usuarioDB) {
             return res.status(400).json({
                 ok: false,
@@ -32,8 +30,8 @@ app.post('/login', (req, res) => {
                 }
             });
         }
+        console.log(req.body.password + ' ' + usuarioDB.password);
 
-        // SOLO EN DESARROLLO
         if (!bcrypt.compareSync(body.password, usuarioDB.password)) {
             return res.status(400).json({
                 ok: false,
@@ -45,7 +43,7 @@ app.post('/login', (req, res) => {
 
         let token = jwt.sign({
             usuario: usuarioDB
-        }, process.env.SEED, { expiresIn: process.env.CADUCIDAD_TOKEN }); // Expira en3 0 días
+        }, process.env.SEED, { expiresIn: process.env.CADUCIDAD_TOKEN });
 
         res.json({
             ok: true,
@@ -57,6 +55,9 @@ app.post('/login', (req, res) => {
     });
 
 });
+
+
+
 
 
 

@@ -4,13 +4,12 @@ const bcrypt = require('bcrypt');
 const _ = require('underscore');
 
 const Usuario = require('../models/usuario');
-
 const { verificaToken, verificaAdmin_Role } = require('../middlewares/autenticacion');
 
 const app = express();
 
-// Usando express
-app.get('/usuario', verificaToken, function(req, res) {
+
+app.get('/usuario', verificaToken, (req, res) => {
 
 
     let desde = req.query.desde || 0;

@@ -38,7 +38,8 @@ if (process.env.NODE_ENV === 'dev') {
     console.log(urlDB);
 } else {
     //urlDB = process.env.MONGO_URI;
-    urlDB = process.env.MONGO_URI;
+    urlDB = "mongodb+srv://admin:5v0pn9dlorsb1y4P@cluster0-ftdpr.mongodb.net/cafe";
+    //urlDB = process.env.MONGO_URI;
     console.log(urlDB);
 }
 process.env.URLDB = urlDB;

@@ -30,7 +30,7 @@ app.post('/login', (req, res) => {
                 }
             });
         }
-        console.log(req.body.password + ' ' + usuarioDB.password);
+
 
         if (!bcrypt.compareSync(body.password, usuarioDB.password)) {
             return res.status(400).json({
@@ -45,10 +45,10 @@ app.post('/login', (req, res) => {
             usuario: usuarioDB
         }, process.env.SEED, { expiresIn: process.env.CADUCIDAD_TOKEN });
 
-        res.text({
+        res.json({
             ok: true,
             usuario: usuarioDB,
-            token: token
+            token
         });
 
 

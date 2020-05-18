@@ -1,4 +1,4 @@
-require('/config/config');
+require('./config/config');
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // Configuración global de rutas
-app.use(require('/routes/index'));
+app.use(require('./routes/index'));
 
 
 mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useUnifiedTopology: true }, (err, res) => {
